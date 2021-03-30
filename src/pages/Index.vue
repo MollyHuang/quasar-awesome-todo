@@ -12,7 +12,8 @@
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
       v-autofocus
-      :style="errorStyle"
+      :class="{ 'error': message.length > 22 }"
+      ref="messageInput"
     />
 
     <button @click="clearMessage">Clear</button>
@@ -50,7 +51,7 @@ export default {
         // return 'color: red; background: pink;' // it can work too
         return {
           'color': 'red',
-          'background': 'pink'
+          'background': 'pink !important'
         }
       }
     }
@@ -75,29 +76,9 @@ export default {
       }
     }
   },
-  beforeCreate() {
-    console.log("==> beforeCreate")
-  },
-  created() {
-    console.log("==> created")
-  },
-  beforeMount() {
-    console.log("==> beforeMount")
-  },
   mounted() {
-    console.log("==> mounted")
-  },
-  beforeUpdate() {
-    console.log("==> beforeUpdate")
-  },
-  updated() {
-    console.log("==> updated")
-  },
-  beforeDestroy() {
-    console.log("==> beforeDestroy")
-  },
-  destroyed() {
-    console.log("==> destroyed")
+    console.log("==> mounted", this.$refs )
+    this.$refs.messageInput.className = 'bg-green'
   }
 }
 </script>
