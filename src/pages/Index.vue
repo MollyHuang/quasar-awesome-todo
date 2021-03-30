@@ -1,12 +1,18 @@
 <template>
   <q-page padding>
+
     <input
       v-model="message"
       @keyup.esc="clearMessage"
-      @keyup.enter="alertMessage"
-      @mouseleave="alertMessage">
+      @keyup.enter="alertMessage">
+
     <button @click="clearMessage">Clear</button>
-    <h5 class="border-grey" v-show="message.length">{{ message }}</h5>
+
+    <h5
+      class="border-grey"
+      v-if="message.length">{{ message }}</h5>
+    <h6 v-else>No message entered</h6>
+
   </q-page>
 </template>
 
