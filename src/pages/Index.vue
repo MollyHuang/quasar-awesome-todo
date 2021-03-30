@@ -12,9 +12,12 @@
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
       v-autofocus
+      v-bind:class="{'error' : message.length > 22}"
     />
 
     <button @click="clearMessage">Clear</button>
+
+    <div>{{ message.length }}</div>
 
     <h5
       class="border-grey"
@@ -70,5 +73,13 @@ export default {
   .border-grey {
     border: 1px solid grey;
     padding: .5rem; 
+  }
+  input, button {
+    font-size: 23px;
+    padding: .5rem; 
+  }
+  .error {
+    color: red;
+    background: pink;
   }
 </style>
