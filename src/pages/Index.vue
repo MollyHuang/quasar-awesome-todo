@@ -22,6 +22,7 @@
     <hr>
 
     <p>Uppercase message: {{ messageUppercase }}</p>
+    <p>Lowercase message: {{ message | messageLowercase }}</p>
 
   </q-page>
 </template>
@@ -47,6 +48,11 @@ export default {
     alertMessage() {
       alert(this.message)
     }
+  },
+  filters: {
+    messageLowercase(value) {
+      return value.toLowerCase()
+    }
   }
 }
 </script>
@@ -54,5 +60,6 @@ export default {
 <style scoped>
   .border-grey {
     border: 1px solid grey;
+    padding: .5rem; 
   }
 </style>
