@@ -1,6 +1,12 @@
 <template>
   <q-page padding>
 
+    <button
+      style="position: absolute; right: 10px"
+      @click="counter++">
+      {{ counter }}
+    </button>
+
     <input
       v-model="message"
       @keyup.esc="clearMessage"
@@ -13,6 +19,10 @@
       v-if="message.length">{{ message }}</h5>
     <h6 v-else>No message entered</h6>
 
+    <hr>
+
+    <p>Uppercase message: {{ messageUppercase }}</p>
+
   </q-page>
 </template>
 
@@ -20,7 +30,14 @@
 export default {
   data() {
     return {
-      message: "I love Vue.js so hard"
+      message: "I love Vue.js so hard",
+      counter: 0
+    }
+  },
+  computed: {
+    messageUppercase() {
+      console.log("messageUppercase was fired.")
+      return this.message.toUpperCase()
     }
   },
   methods: {
