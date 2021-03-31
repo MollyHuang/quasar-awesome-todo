@@ -6,7 +6,7 @@
         v-for="(task, index) in tasks"
         :task="task"
         :index="index"
-      ></task>
+      >{{ task.name }}</task>
     </ul>
 
   </q-page>
