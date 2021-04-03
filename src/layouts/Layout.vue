@@ -1,28 +1,19 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh lpR fFf">
 
     <q-header elevated>
 
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="absolute-center">
+          Awosome Todo
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
 
     </q-header>
 
-    <q-footer elevated>
+    <q-footer>
       <q-tabs>
         <q-route-tab
           v-for="nav in navs"
@@ -37,23 +28,20 @@
     <q-drawer
       v-model="leftDrawerOpen"
       :breakpoint="767"
+      :width="250"
       show-if-above
       bordered
-      content-class="bg-grey-1"
+      content-class="bg-primary"
     >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Navigation
-        </q-item-label>
+      <q-list dark>
+        <q-item-label header>Navigation</q-item-label>
 
         <q-item
           v-for="nav in navs"
           :key="nav.label"
           :to="nav.to"
           exact
+          class="text-grey-4"
           clickable
         >
           <q-item-section avatar>
@@ -101,6 +89,10 @@ export default {
   @media screen and (min-width: 768px) {
     .q-footer {
       display: none;
-    }    
+    }
+  }
+
+  .q-drawer .q-router-link--exact-active {
+    color: white !important;
   }
 </style>
