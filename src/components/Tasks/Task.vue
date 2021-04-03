@@ -18,7 +18,7 @@
       </q-item-label>
     </q-item-section>
 
-    <q-item-section side>
+    <q-item-section>
       <div class="row">
         <div class="column justify-center">
           <q-icon name="event" size="18px" class="q-mr-xs" />
@@ -30,6 +30,35 @@
       </div>
     </q-item-section>
 
+    <q-item-section side>
+      <q-btn
+        @click.stop="promptToDelete()"
+        flat
+        round
+        dense
+        icon="delete" />
+
+        <q-dialog v-model="confirm" persistent>
+          <q-card>
+            <q-card-section class="row items-center">
+              <q-avatar icon="delete" color="primary" text-color="white" />
+              <span class="q-ml-sm">Really delete?</span>
+            </q-card-section>
+
+            <q-card-actions align="right">
+              <q-btn flat label="Cancel" color="third" v-close-popup />
+              <q-btn
+                @click.stop="deleteTask(id)"
+                flat
+                dense
+                label="Yes"
+                color="primary"
+                v-close-popup />
+            </q-card-actions>
+          </q-card>
+        </q-dialog>
+    </q-item-section>
+
   </q-item>
 </template>
 
@@ -37,9 +66,17 @@
   import { mapActions } from 'vuex'
 
   export default {
+    data() {
+      return {
+        confirm: false,
+      }
+    },
     props: ['task', 'id'],
     methods: {
-      ...mapActions('tasks', ['updateTask'])
+      ...mapActions('tasks', ['updateTask', 'deleteTask']),
+      promptToDelete() {
+        this.confirm = true
+      }
     }
   }
 </script>
