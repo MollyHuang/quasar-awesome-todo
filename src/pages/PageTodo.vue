@@ -6,8 +6,8 @@
       bordered>
 
       <q-item
-        v-for="task in tasks"
-        :key="task.id"
+        v-for="(task, key) in tasks"
+        :key="key"
         @click="task.completed = !task.completed"
         :class="task.completed? 'bg-green-1' : 'bg-orange-1'"
         clickable
@@ -19,7 +19,7 @@
         <q-item-section>
           <q-item-label
             :class="task.completed? 'text-strike': null">
-            {{ task.name }}
+            {{ task.name }} {{ key }}
           </q-item-label>
         </q-item-section>
 
