@@ -42,11 +42,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   computed: {
-    tasks() {
-      return this.$store.getters['tasks/tasks']
-    }
+    ...mapGetters('tasks', ['tasks'])
+
+    // tasks() {
+    //   return this.$store.getters['tasks/tasks']
+    // }
   }
 }
 </script>
