@@ -18,12 +18,7 @@
 
       </q-card-section>
 
-      <q-card-actions align="right">
-        <q-btn
-          label="Save"
-          color="primary"
-          type="submit" />
-      </q-card-actions>
+      <model-buttons />
 
       <pre>{{ taskToSubmit }}</pre>
       
@@ -66,7 +61,8 @@
       'model-header': require('../Modals/Shared/ModalHeader.vue').default,
       'model-task-name': require('../Modals/Shared/ModalTaskName.vue').default,
       'model-due-date': require('../Modals/Shared/ModalDueDate.vue').default,
-      'model-due-time': require('../Modals/Shared/ModalDueTime.vue').default
+      'model-due-time': require('../Modals/Shared/ModalDueTime.vue').default,
+      'model-buttons': require('../Modals/Shared/ModalButtons.vue').default
     }
   }
 </script>
