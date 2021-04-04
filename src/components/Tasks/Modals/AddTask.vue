@@ -79,26 +79,30 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      taskToSubmit: {
-        name: '',
-        completed: false,
-        dueDate: '',
-        dueTime: ''
+  import { mapActions } from 'vuex'
+  export default {
+    data() {
+      return {
+        taskToSubmit: {
+          name: '',
+          completed: false,
+          dueDate: '',
+          dueTime: ''
+        }
+      }
+    },
+    methods: {
+      ...mapActions('tasks', ['addTask']),
+      submitForm() {
+        console.log('submitForm', this.$refs.name)
+        // this.$refs.name.validate()
+        this.submitTask()
+      },
+      submitTask() {
+        console.log('submitTask')
+        this.addTask(this.taskToSubmit)
+        this.$emit('close')
       }
     }
-  },
-  methods: {
-    submitForm() {
-      console.log('submitForm', this.$refs.name)
-      // this.$refs.name.validate()
-      this.submitTask()
-    },
-    submitTask() {
-      console.log('submitTask')
-    }
   }
-}
 </script>
