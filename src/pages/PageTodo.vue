@@ -2,6 +2,7 @@
   <q-page class="q-pa-md">
 
     <q-list
+      v-if="Object.keys(tasks).length"
       separator
       bordered>
 
@@ -36,7 +37,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      showAddTask: true
+      showAddTask: false
     }
   },
   computed: {

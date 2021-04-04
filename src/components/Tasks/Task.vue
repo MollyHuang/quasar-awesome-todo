@@ -18,7 +18,8 @@
       </q-item-label>
     </q-item-section>
 
-    <q-item-section>
+    <q-item-section
+      v-if="task.dueDate">
       <div class="row">
         <div class="column justify-center">
           <q-icon name="event" size="18px" class="q-mr-xs" />
