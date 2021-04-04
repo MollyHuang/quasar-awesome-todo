@@ -1,16 +1,7 @@
 <template>
   <q-card>
 
-    <q-card-section class="row">
-      <div class="text-h6">Add Task</div>
-      <q-space />
-      <q-btn
-        v-close-popup
-        flat
-        side
-        dense
-        icon="close" />
-    </q-card-section>
+    <model-header>Add Task</model-header>
 
     <q-form @submit.prevent="submitForm">
       
@@ -137,6 +128,9 @@
         this.taskToSubmit.dueDate = ""
         this.taskToSubmit.dueTime = ""
       }
+    },
+    components: {
+      'model-header': require('../Modals/Shared/ModalHeader.vue').default
     }
   }
 </script>
