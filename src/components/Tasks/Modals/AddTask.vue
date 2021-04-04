@@ -7,24 +7,7 @@
       
       <q-card-section class="q-pt-none">
 
-        <div class="row q-mb-sm">
-          <q-input
-            outlined
-            autofocus
-            v-model="taskToSubmit.name"
-            label="Task name"
-            ref="name"
-            :rules="[val => !!val || 'Field is required']"
-            class="col">
-            <template v-slot:append>
-              <q-icon
-                name="close"
-                v-if="taskToSubmit.name"
-                @click="taskToSubmit.name = ''"
-                class="cursor-pointer" />
-            </template>
-          </q-input>
-        </div>
+        <model-task-name :name.sync="taskToSubmit.name" />
 
         <div class="row q-mb-sm">
           <q-input
@@ -93,6 +76,8 @@
           color="primary"
           type="submit" />
       </q-card-actions>
+
+      <pre>{{ taskToSubmit }}</pre>
       
     </q-form>
 
@@ -130,7 +115,8 @@
       }
     },
     components: {
-      'model-header': require('../Modals/Shared/ModalHeader.vue').default
+      'model-header': require('../Modals/Shared/ModalHeader.vue').default,
+      'model-task-name': require('../Modals/Shared/ModalTaskName.vue').default
     }
   }
 </script>
