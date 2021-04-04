@@ -41,7 +41,10 @@
         color="primary"
         icon="edit" />
         <q-dialog v-model="showEditTask">
-          <edit-task @close="showEditTask = false" />
+          <edit-task
+            @close="showEditTask = false"
+            :task="task"
+            :id="id" />
         </q-dialog>
 
       <q-btn
