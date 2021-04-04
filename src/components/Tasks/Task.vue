@@ -32,13 +32,24 @@
     </q-item-section>
 
     <q-item-section side>
+
+      <q-btn
+        @click.stop="showEditTask = true"
+        flat
+        round
+        dense
+        color="primary"
+        icon="edit" />
+        <q-dialog v-model="showEditTask">
+          <edit-task @close="showEditTask = false" />
+        </q-dialog>
+
       <q-btn
         @click.stop="promptToDelete()"
         flat
         round
         dense
         icon="delete" />
-
         <q-dialog v-model="confirm" persistent>
           <q-card>
             <q-card-section class="row items-center">
@@ -70,6 +81,7 @@
     data() {
       return {
         confirm: false,
+        showEditTask: false
       }
     },
     props: ['task', 'id'],
@@ -78,6 +90,9 @@
       promptToDelete() {
         this.confirm = true
       }
+    },
+    components: {
+      'edit-task': require('../Tasks/Modals/EditTask.vue').default
     }
   }
 </script>

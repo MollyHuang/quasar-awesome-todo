@@ -17,7 +17,7 @@
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
-        @click="showAddTask = true"
+        @click.stop="showAddTask = true"
         round
         icon="add"
         size="24px"
@@ -37,7 +37,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      showAddTask: true
+      showAddTask: false
     }
   },
   computed: {

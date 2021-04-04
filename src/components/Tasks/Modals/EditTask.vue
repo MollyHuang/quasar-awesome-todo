@@ -1,7 +1,7 @@
 <template>
   <q-card>
 
-    <model-header>Add Task</model-header>
+    <model-header>Edit Task</model-header>
 
     <q-form @submit.prevent="submitForm">
       
