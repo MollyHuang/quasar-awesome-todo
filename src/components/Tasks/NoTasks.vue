@@ -6,7 +6,7 @@
     No tasks to do now!
     <template v-slot:action>
       <q-btn
-        @click="$emit('showAddTask')"
+        @click="$root.$emit('showAddTask')"
         flat
         color="primary"
         label="Add Task" />

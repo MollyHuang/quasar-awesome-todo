@@ -5,8 +5,7 @@
       v-if="Object.keys(tasksTodo).length"
       :tasksTodo="tasksTodo" />
     <no-tasks
-      v-else
-      @showAddTask="showAddTask = true" />
+      v-else />
 
     <task-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -46,6 +45,11 @@ export default {
     // tasks() {
     //   return this.$store.getters['tasks/tasksTodo']
     // }
+  },
+  mounted() {
+    this.$root.$on('showAddTask', () => {
+      this.showAddTask = true
+    })
   },
   components: {
     "task-todo": require("../components/Tasks/TaskTodo.vue").default,
