@@ -4,6 +4,9 @@
     <task-todo
       v-if="Object.keys(tasksTodo).length"
       :tasksTodo="tasksTodo" />
+    <no-tasks
+      v-else
+      @showAddTask="showAddTask = true" />
 
     <task-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -47,6 +50,7 @@ export default {
   components: {
     "task-todo": require("../components/Tasks/TaskTodo.vue").default,
     "task-completed": require("../components/Tasks/TaskCompleted.vue").default,
+    "no-tasks": require("../components/Tasks/NoTasks.vue").default,
     "add-task": require("../components/Tasks/Modals/AddTask.vue").default
   }
 };
