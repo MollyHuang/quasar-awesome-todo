@@ -1,6 +1,10 @@
 <template>
   <q-page class="q-pa-md">
 
+    <div class="row q-mb-lg">
+      <search />
+    </div>
+
     <task-todo
       v-if="Object.keys(tasksTodo).length"
       :tasksTodo="tasksTodo" />
@@ -30,6 +34,7 @@
 </template>
 
 <script>
+import Search from 'components/Tools/Search.vue';
 import { mapGetters } from "vuex";
 import TaskCompleted from '../components/Tasks/TaskCompleted.vue';
 
@@ -52,10 +57,11 @@ export default {
     })
   },
   components: {
-    "task-todo": require("../components/Tasks/TaskTodo.vue").default,
-    "task-completed": require("../components/Tasks/TaskCompleted.vue").default,
-    "no-tasks": require("../components/Tasks/NoTasks.vue").default,
-    "add-task": require("../components/Tasks/Modals/AddTask.vue").default
+    "task-todo": require("components/Tasks/TaskTodo.vue").default,
+    "task-completed": require("components/Tasks/TaskCompleted.vue").default,
+    "no-tasks": require("components/Tasks/NoTasks.vue").default,
+    "add-task": require("components/Tasks/Modals/AddTask.vue").default,
+    "search": require("components/Tools/Search.vue").default
   }
 };
 </script>
