@@ -32,46 +32,47 @@
     </q-item-section>
 
     <q-item-section side>
+      <div class="row">
+        <q-btn
+          @click.stop="showEditTask = true"
+          flat
+          round
+          dense
+          color="primary"
+          icon="edit" />
+          <q-dialog v-model="showEditTask">
+            <edit-task
+              @close="showEditTask = false"
+              :task="task"
+              :id="id" />
+          </q-dialog>
 
-      <q-btn
-        @click.stop="showEditTask = true"
-        flat
-        round
-        dense
-        color="primary"
-        icon="edit" />
-        <q-dialog v-model="showEditTask">
-          <edit-task
-            @close="showEditTask = false"
-            :task="task"
-            :id="id" />
-        </q-dialog>
+        <q-btn
+          @click.stop="promptToDelete()"
+          flat
+          round
+          dense
+          icon="delete" />
+          <q-dialog v-model="confirm" persistent>
+            <q-card>
+              <q-card-section class="row items-center">
+                <q-avatar icon="delete" color="primary" text-color="white" />
+                <span class="q-ml-sm">Really delete?</span>
+              </q-card-section>
 
-      <q-btn
-        @click.stop="promptToDelete()"
-        flat
-        round
-        dense
-        icon="delete" />
-        <q-dialog v-model="confirm" persistent>
-          <q-card>
-            <q-card-section class="row items-center">
-              <q-avatar icon="delete" color="primary" text-color="white" />
-              <span class="q-ml-sm">Really delete?</span>
-            </q-card-section>
-
-            <q-card-actions align="right">
-              <q-btn flat label="Cancel" color="third" v-close-popup />
-              <q-btn
-                @click.stop="deleteTask(id)"
-                flat
-                dense
-                label="Yes"
-                color="primary"
-                v-close-popup />
-            </q-card-actions>
-          </q-card>
-        </q-dialog>
+              <q-card-actions align="right">
+                <q-btn flat label="Cancel" color="third" v-close-popup />
+                <q-btn
+                  @click.stop="deleteTask(id)"
+                  flat
+                  dense
+                  label="Yes"
+                  color="primary"
+                  v-close-popup />
+              </q-card-actions>
+            </q-card>
+          </q-dialog>
+      </div>
     </q-item-section>
 
   </q-item>
@@ -99,7 +100,3 @@
     }
   }
 </script>
-
-<style lang="scss">
-  
-</style>
