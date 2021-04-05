@@ -1,9 +1,13 @@
 <template>
   <q-page class="q-pa-md">
 
-    <task-todo :tasksTodo="tasksTodo" />
+    <task-todo
+      v-if="Object.keys(tasksTodo).length"
+      :tasksTodo="tasksTodo" />
 
-    <task-completed :tasksCompleted="tasksCompleted" />
+    <task-completed
+      v-if="Object.keys(tasksCompleted).length"
+      :tasksCompleted="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
