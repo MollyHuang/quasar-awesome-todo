@@ -5,11 +5,16 @@
       <search />
     </div>
 
+    <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">
+      No search results.
+    </p>
+
+    <no-tasks
+      v-if="!Object.keys(tasksTodo).length && !search" />
+
     <task-todo
       v-if="Object.keys(tasksTodo).length"
       :tasksTodo="tasksTodo" />
-    <no-tasks
-      v-else />
 
     <task-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -34,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   data() {
@@ -43,6 +48,7 @@ export default {
     };
   },
   computed: {
+    ...mapState("tasks", ["search"]),
     ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
 
     // tasks() {
