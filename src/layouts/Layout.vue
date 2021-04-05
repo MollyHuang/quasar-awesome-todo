@@ -75,6 +75,11 @@ export default {
           to: '/'
         },
         {
+          label: 'Foods',
+          icon: 'restaurant',
+          to: '/foods'
+        },
+        {
           label: 'Settings',
           icon: 'settings',
           to: '/settings'
