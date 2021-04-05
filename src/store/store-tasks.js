@@ -27,16 +27,16 @@ const state = {
 
 const mutations = {
   updateTask(state, payload) {
-    console.log('payload (from mutations): ', payload)
+    // console.log('payload (from mutations): ', payload)
     Object.assign(state.tasks[payload.id], payload.updates)
   },
   deleteTask(state, id) {
-    console.log('deleteTask id (from mutations): ', id)
+    // console.log('deleteTask id (from mutations): ', id)
     // delete state.tasks[id]
     Vue.delete(state.tasks, id)
   },
   addTask(state, payload) {
-    console.log('addTask (from mutations): ', payload)
+    // console.log('addTask (from mutations): ', payload)
     Vue.set(state.tasks, payload.id, payload.task)
   },
   setSearch(state, value) {
@@ -46,8 +46,8 @@ const mutations = {
 
 const actions = {
   updateTask({ commit }, payload) {
-    console.log('updateTask action')
-    console.log('payload: ', payload)
+    // console.log('updateTask action')
+    // console.log('payload: ', payload)
     commit('updateTask', payload)
   },
   deleteTask({ commit }, id) {
@@ -67,12 +67,32 @@ const actions = {
 }
 
 const getters = {
+  tasksSorted: (state) => {
+    let tasksSorted = {},
+      keysOrdered = Object.keys(state.tasks)
+
+    keysOrdered.sort((a, b) => {
+      let taskAProp = state.tasks[a].name.toLowerCase(),
+        taskBProp = state.tasks[b].name.toLowerCase()
+      if (taskAProp > taskBProp) return 1
+      else if (taskAProp < taskBProp) return -1
+      else return 0
+    })
+
+    keysOrdered.forEach((key) => {
+      tasksSorted[key] = state.tasks[key]
+    })
+    // console.log('keysOrdered: ', keysOrdered)
+
+    return tasksSorted
+  },
   tasksFiltered: (state, getters) => {
+    let tasksSorted = getters.tasksSorted
     let tasksFiltered = {}
     if (state.search) {
       // populate empty object
-      Object.keys(state.tasks).forEach((key) => {
-        let task = state.tasks[key]
+      Object.keys(tasksSorted).forEach((key) => {
+        let task = tasksSorted[key]
         // console.log('key: ', task)
         if (task.name.toLowerCase().includes(state.search.toLowerCase())) {
           tasksFiltered[key] = task
@@ -80,7 +100,7 @@ const getters = {
       })
       return tasksFiltered
     }
-    return state.tasks
+    return tasksSorted
   },
   tasksTodo: (state, getters) => {
     let tasksFiltered = getters.tasksFiltered
