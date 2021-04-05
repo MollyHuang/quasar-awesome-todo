@@ -3,8 +3,6 @@
 
     <task-todo :tasksTodo="tasksTodo" />
 
-    <hr>
-
     <task-completed :tasksCompleted="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-lg">
