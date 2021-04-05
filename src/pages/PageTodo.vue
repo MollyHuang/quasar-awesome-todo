@@ -3,6 +3,7 @@
 
     <div class="row q-mb-lg">
       <search />
+      <sort />
     </div>
 
     <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">
@@ -65,7 +66,8 @@ export default {
     "task-completed": require("components/Tasks/TaskCompleted.vue").default,
     "no-tasks": require("components/Tasks/NoTasks.vue").default,
     "add-task": require("components/Tasks/Modals/AddTask.vue").default,
-    "search": require("components/Tools/Search.vue").default
+    "search": require("components/Tools/Search.vue").default,
+    "sort": require("components/Tools/Sort.vue").default
   }
 };
 </script>
