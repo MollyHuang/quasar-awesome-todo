@@ -34,9 +34,7 @@
 </template>
 
 <script>
-import Search from 'components/Tools/Search.vue';
 import { mapGetters } from "vuex";
-import TaskCompleted from '../components/Tasks/TaskCompleted.vue';
 
 export default {
   data() {
