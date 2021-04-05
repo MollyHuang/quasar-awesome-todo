@@ -2,17 +2,29 @@
   <q-page class="q-pa-md">
 
     <q-list
-      v-if="Object.keys(tasks).length"
+      v-if="Object.keys(tasksTodo).length"
       separator
       bordered>
-
       <task
-        v-for="(task, key) in tasks"
+        v-for="(task, key) in tasksTodo"
         :key="key"
         :id="key"
         :task="task">
       </task>
+    </q-list>
 
+    <hr>
+
+    <q-list
+      v-if="Object.keys(tasksCompleted).length"
+      separator
+      bordered>
+      <task
+        v-for="(task, key) in tasksCompleted"
+        :key="key"
+        :id="key"
+        :task="task">
+      </task>
     </q-list>
 
     <div class="absolute-bottom text-center q-mb-lg">
@@ -21,39 +33,37 @@
         round
         icon="add"
         size="24px"
-        color="primary" />
+        color="primary"
+      />
     </div>
 
     <q-dialog v-model="showAddTask">
-      <add-task @close="showAddTask = false" />
+      <add-task
+        @close="showAddTask = false" />
     </q-dialog>
-
+    
   </q-page>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       showAddTask: false
-    }
+    };
   },
   computed: {
-    ...mapGetters('tasks', ['tasks'])
+    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
 
     // tasks() {
-    //   return this.$store.getters['tasks/tasks']
+    //   return this.$store.getters['tasks/tasksTodo']
     // }
   },
   components: {
-    'task': require('../components/Tasks/Task.vue').default,
-    'add-task': require('../components/Tasks/Modals/AddTask.vue').default
+    task: require("../components/Tasks/Task.vue").default,
+    "add-task": require("../components/Tasks/Modals/AddTask.vue").default
   }
-}
+};
 </script>
-
-<style scoped>
-
-</style>
