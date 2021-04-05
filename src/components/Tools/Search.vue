@@ -18,11 +18,15 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      searchField: 'Test'
+  import { mapState } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapState('tasks', ['search']),
+      searchField() {
+        return this.search
+      }
     }
   }
-}
+
 </script>
