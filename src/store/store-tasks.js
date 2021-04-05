@@ -22,7 +22,7 @@ const state = {
       dueTime: '16:00'
     }
   },
-  search: 'Test'
+  search: ''
 }
 
 const mutations = {
@@ -39,6 +39,9 @@ const mutations = {
     console.log('addTask (from mutations): ', payload)
     Vue.set(state.tasks, payload.id, payload.task)
   },
+  setSearch(state, value) {
+    state.search = value
+  }
 }
 
 const actions = {
@@ -57,6 +60,9 @@ const actions = {
       task: task
     }
     commit('addTask', payload)
+  },
+  setSearch({ commit }, value) {
+    commit('setSearch', value)
   }
 }
 

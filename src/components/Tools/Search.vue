@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
 
   export default {
     computed: {
@@ -29,8 +29,12 @@
         },
         set(value) {
           console.log("value:", value)
+          this.setSearch(value)
         }
       }
+    },
+    methods: {
+      ...mapActions('tasks', ['setSearch'])
     }
   }
 
