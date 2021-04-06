@@ -14,8 +14,8 @@
 
     <q-item-section>
       <q-item-label
-        :class="task.completed? 'text-strike': null">
-        {{ task.name }}
+        :class="task.completed? 'text-strike': null"
+        v-html="$options.filters.searchHighlight(task.name, search)">
       </q-item-label>
     </q-item-section>
 
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
   import { date } from 'quasar'
 
   export default {
@@ -89,6 +89,9 @@
         confirm: false,
         showEditTask: false
       }
+    },
+    computed: {
+      ...mapState('tasks', ['search'])
     },
     props: ['task', 'id'],
     methods: {
@@ -104,6 +107,18 @@
       niceDate(value) {
         const { formatDate } = date // it would be better to add this so that only the formatDate method is added to the project
         return formatDate(value, 'MMM D')
+      },
+      searchHighlight(value, search) {
+        // console.log('value: ', value)
+        // console.log('search: ', search)
+        if (search) {
+          // return value.replace(search, '<span class="bg-yellow-6">' + search + '</span>')
+          let searchRegExp = new RegExp(search, 'ig')
+          return value.replace(searchRegExp, (match) => {
+            return '<span class="bg-yellow-6">' + match + '</span>'
+          })
+        }
+        return value
       }
     },
     components: {
