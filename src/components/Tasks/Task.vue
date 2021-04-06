@@ -3,6 +3,7 @@
     @click="updateTask({id: id, updates: {completed: !task.completed}})"
     :class="task.completed? 'bg-green-1' : 'bg-orange-1'"
     clickable
+    v-touch-hold:1000.mouse="showEditTaskModal"
     v-ripple>
 
     <q-item-section side top>
@@ -34,7 +35,7 @@
     <q-item-section side>
       <div class="row">
         <q-btn
-          @click.stop="showEditTask = true"
+          @click.stop="showEditTaskModal"
           flat
           round
           dense
@@ -91,6 +92,9 @@
     props: ['task', 'id'],
     methods: {
       ...mapActions('tasks', ['updateTask', 'deleteTask']),
+      showEditTaskModal() {
+        this.showEditTask = true
+      },
       promptToDelete() {
         this.confirm = true
       }
