@@ -28,10 +28,11 @@
       
       </q-scroll-area>
 
-      <div class="absolute-bottom text-center q-mb-lg">
+      <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
         <q-btn
           @click.stop="showAddTask = true"
           round
+          class="all-pointer-events"
           icon="add"
           size="24px"
           color="primary"
