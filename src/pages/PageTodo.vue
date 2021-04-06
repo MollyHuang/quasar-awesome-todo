@@ -6,20 +6,24 @@
       <sort />
     </div>
 
-    <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">
-      No search results.
-    </p>
+    <div class="relative-position">
 
-    <no-tasks
-      v-if="!Object.keys(tasksTodo).length && !search" />
+      <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">
+        No search results.
+      </p>
 
-    <task-todo
-      v-if="Object.keys(tasksTodo).length"
-      :tasksTodo="tasksTodo" />
+      <no-tasks
+        v-if="!Object.keys(tasksTodo).length && !search" />
 
-    <task-completed
-      v-if="Object.keys(tasksCompleted).length"
-      :tasksCompleted="tasksCompleted" />
+      <task-todo
+        v-if="Object.keys(tasksTodo).length"
+        :tasksTodo="tasksTodo" />
+
+      <task-completed
+        v-if="Object.keys(tasksCompleted).length"
+        :tasksCompleted="tasksCompleted" />
+    
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
