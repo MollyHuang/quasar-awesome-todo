@@ -3,6 +3,7 @@
     v-model="searchField"
     outlined
     v-select-all
+    @keyup.esc="searchField = ''"
     class="col"
     label="Search">
 
