@@ -3,6 +3,7 @@
     <q-input
       outlined
       autofocus
+      v-select-all
       :value="name"
       @input="$emit('update:name', $event)"
       :rules="[val => !!val || 'Field is required']"
@@ -22,6 +23,18 @@
 
 <script>
 export default {
-  props: ['name']
+  props: ['name'],
+  directives: {
+    selectAll: {
+      bind(el) {
+        let input = el.querySelector('.q-field__native')
+        input.addEventListener('focus', () => {
+          if (input.value.length > 0 ){
+            input.select()
+          }
+        })
+      }
+    }
+  }
 }
 </script>

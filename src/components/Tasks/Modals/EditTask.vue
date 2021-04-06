@@ -62,7 +62,7 @@
       'model-due-time': require('../Modals/Shared/ModalDueTime.vue').default,
       'model-buttons': require('../Modals/Shared/ModalButtons.vue').default
     },
-    mounted() {
+    created() {
       this.taskToSubmit = Object.assign({}, this.task)
     }
   }
