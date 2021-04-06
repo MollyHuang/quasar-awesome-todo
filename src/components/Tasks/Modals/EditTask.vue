@@ -27,8 +27,10 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import mixinAddEditTask from 'src/mixins/mixin-add-edit-task'
 
   export default {
+    mixins: [mixinAddEditTask],
     props: ['task', 'id'],
     data() {
       return {
@@ -37,31 +39,31 @@
     },
     methods: {
       ...mapActions('tasks', ['updateTask']),
-      submitForm() {
-        console.log('[EditTask] submitForm', this.$refs.name)
-        // this.$refs.name.validate()
-        this.submitTask()
-      },
+      // submitForm() {
+      //   console.log('[EditTask] submitForm', this.$refs.name)
+      //   // this.$refs.name.validate()
+      //   this.submitTask()
+      // },
       submitTask() {
-        console.log('[EditTask] submitTask')
+        // console.log('[EditTask] submitTask')
         this.updateTask({
           id: this.id,
           updates: this.taskToSubmit
         })
         this.$emit('close')
       },
-      clearDueDate() {
-        this.taskToSubmit.dueDate = ""
-        this.taskToSubmit.dueTime = ""
-      }
+      // clearDueDate() {
+      //   this.taskToSubmit.dueDate = ""
+      //   this.taskToSubmit.dueTime = ""
+      // }
     },
-    components: {
-      'model-header': require('../Modals/Shared/ModalHeader.vue').default,
-      'model-task-name': require('../Modals/Shared/ModalTaskName.vue').default,
-      'model-due-date': require('../Modals/Shared/ModalDueDate.vue').default,
-      'model-due-time': require('../Modals/Shared/ModalDueTime.vue').default,
-      'model-buttons': require('../Modals/Shared/ModalButtons.vue').default
-    },
+    // components: {
+    //   'model-header': require('../Modals/Shared/ModalHeader.vue').default,
+    //   'model-task-name': require('../Modals/Shared/ModalTaskName.vue').default,
+    //   'model-due-date': require('../Modals/Shared/ModalDueDate.vue').default,
+    //   'model-due-time': require('../Modals/Shared/ModalDueTime.vue').default,
+    //   'model-buttons': require('../Modals/Shared/ModalButtons.vue').default
+    // },
     created() {
       this.taskToSubmit = Object.assign({}, this.task)
     }
