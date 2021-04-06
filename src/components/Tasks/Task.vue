@@ -26,7 +26,7 @@
           <q-icon name="event" size="18px" class="q-mr-xs" />
         </div>
         <div class="column">
-          <q-item-label class="row justify-end" caption>{{ task.dueDate }}</q-item-label>
+          <q-item-label class="row justify-end" caption>{{ task.dueDate | niceDate }}</q-item-label>
           <q-item-label class="row justify-end" caption><small>{{ task.dueTime }}</small></q-item-label>
         </div>
       </div>
@@ -81,6 +81,7 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import { date } from 'quasar'
 
   export default {
     data() {
@@ -97,6 +98,12 @@
       },
       promptToDelete() {
         this.confirm = true
+      }
+    },
+    filters: {
+      niceDate(value) {
+        const { formatDate } = date // it would be better to add this so that only the formatDate method is added to the project
+        return formatDate(value, 'MMM D')
       }
     },
     components: {
