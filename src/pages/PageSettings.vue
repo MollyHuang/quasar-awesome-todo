@@ -18,11 +18,13 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      show12hourTimeformat: true
+  import { mapGetters } from 'vuex'
+  export default {
+    computed: {
+      ...mapGetters('settings', [ 'settings' ]),
+      show12hourTimeformat() {
+        return this.settings.show12hourTimeformat
+      }
     }
   }
-}
 </script>
