@@ -27,7 +27,7 @@
         </div>
         <div class="column">
           <q-item-label class="row justify-end" caption>{{ task.dueDate | niceDate }}</q-item-label>
-          <q-item-label class="row justify-end" caption><small>{{ task.dueTime }}</small></q-item-label>
+          <q-item-label class="row justify-end" caption><small>{{ taskDueTime }}</small></q-item-label>
         </div>
       </div>
     </q-item-section>
@@ -80,10 +80,11 @@
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+  import { mapState, mapActions, mapGetters } from 'vuex'
   import { date } from 'quasar'
 
   export default {
+    props: ['task', 'id'],
     data() {
       return {
         confirm: false,
@@ -91,9 +92,17 @@
       }
     },
     computed: {
-      ...mapState('tasks', ['search'])
+      ...mapState('tasks', ['search']),
+      ...mapGetters('settings', ['settings']),
+      taskDueTime() {
+        if (this.settings.show12hourTimeformat) {
+          const { formatDate } = date // it would be better to add this so that only the formatDate method is added to the project
+          // 2019/05/15 16:00
+          return formatDate(this.task.dueDate + ' ' + this.task.dueTime, 'h:mm A')
+        }
+        return this.task.dueTime
+      }
     },
-    props: ['task', 'id'],
     methods: {
       ...mapActions('tasks', ['updateTask', 'deleteTask']),
       showEditTaskModal() {
