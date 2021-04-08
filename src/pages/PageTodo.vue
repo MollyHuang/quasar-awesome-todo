@@ -15,7 +15,9 @@
         </p>
 
         <no-tasks
-          v-if="!Object.keys(tasksTodo).length && !search" />
+          v-if="!Object.keys(tasksTodo).length 
+          && !search
+          && !settings.showTasksInOneList" />
 
         <task-todo
           v-if="Object.keys(tasksTodo).length"
@@ -50,7 +52,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapState } from "vuex"
 
 export default {
   data() {
@@ -60,6 +62,7 @@ export default {
   },
   computed: {
     ...mapState("tasks", ["search"]),
+    ...mapGetters("settings", ["settings"]),
     ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
 
     // tasks() {

@@ -13,6 +13,18 @@
             color="blue"></q-toggle>
         </q-item-section>
       </q-item>
+
+      <q-item tag="label" v-ripple>
+        <q-item-section>
+          <q-item-label>Show Task in one list</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-toggle 
+            v-model="showTasksInOneList"
+            color="blue"></q-toggle>
+        </q-item-section>
+      </q-item>
+
     </q-list>
   </q-page>
 </template>
@@ -28,12 +40,23 @@
           return this.settings.show12hourTimeformat
         },
         set(value) {
-          this.setshow12hourTimeformat(value)
+          this.setShow12hourTimeformat(value)
+        }
+      },
+      showTasksInOneList: {
+        get () {
+          return this.settings.showTasksInOneList
+        },
+        set(value) {
+          this.setShowTasksInOneList(value)
         }
       }
     },
     methods: {
-      ...mapActions('settings', ['setshow12hourTimeformat'])
+      ...mapActions('settings', [
+        'setShow12hourTimeformat',
+        'setShowTasksInOneList'
+      ])
     }
   }
 </script>

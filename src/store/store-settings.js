@@ -1,19 +1,26 @@
 const state = {
   settings: {
-    show12hourTimeformat: false
+    show12hourTimeformat: false,
+    showTasksInOneList: false
   }
 }
 
 const mutations = {
-  setshow12hourTimeformat(state, value) {
+  setShow12hourTimeformat(state, value) {
     state.settings.show12hourTimeformat = value
+  },
+  setShowTasksInOneList(state, value) {
+    state.settings.showTasksInOneList = value
   }
 }
 
 const actions = {
-  setshow12hourTimeformat({ commit }, value) {
-    commit('setshow12hourTimeformat', value)
-  }
+  setShow12hourTimeformat({ commit }, value) {
+    commit('setShow12hourTimeformat', value)
+  },
+  setShowTasksInOneList({ commit }, value) {
+    commit('setShowTasksInOneList', value)
+  },
 }
 
 const getters = {
