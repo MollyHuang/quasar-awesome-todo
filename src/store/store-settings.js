@@ -17,9 +17,11 @@ const mutations = {
 const actions = {
   setShow12hourTimeformat({ commit }, value) {
     commit('setShow12hourTimeformat', value)
+    localStorage.setItem('show12hourTimeformat', value)
   },
   setShowTasksInOneList({ commit }, value) {
     commit('setShowTasksInOneList', value)
+    localStorage.setItem('showTasksInOneList', value)
   },
 }
 
