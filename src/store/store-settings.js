@@ -1,3 +1,6 @@
+// outside of a Vue file
+import { LocalStorage } from 'quasar'
+
 const state = {
   settings: {
     show12hourTimeformat: false,
@@ -15,14 +18,19 @@ const mutations = {
 }
 
 const actions = {
-  setShow12hourTimeformat({ commit }, value) {
+  setShow12hourTimeformat({ commit, dispatch }, value) {
     commit('setShow12hourTimeformat', value)
-    localStorage.setItem('show12hourTimeformat', value)
+    // localStorage.setItem('show12hourTimeformat', value)
+    dispatch('saveSettings')
   },
-  setShowTasksInOneList({ commit }, value) {
+  setShowTasksInOneList({ commit, dispatch }, value) {
     commit('setShowTasksInOneList', value)
-    localStorage.setItem('showTasksInOneList', value)
+    // localStorage.setItem('showTasksInOneList', value)
+    dispatch('saveSettings')
   },
+  saveSettings({ state }) {
+    LocalStorage.set('settings', state.settings)
+  }
 }
 
 const getters = {
