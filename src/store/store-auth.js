@@ -35,13 +35,17 @@ const actions = {
     firebaseAuth.signOut()
   },
   handleAuthStateChange({ commit }) {
-    firebaseAuth.onAuthStateChanged(function (user) {
+    firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
         commit('setLoggedIn', true)
+        this.$router.push('/')
+          .catch(err => { })
       }
       else {
         commit('setLoggedIn', false)
+        this.$router.replace('/auth')
+          .catch(err => { })
       }
     })
   },
