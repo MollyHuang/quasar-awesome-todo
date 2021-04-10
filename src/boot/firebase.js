@@ -12,6 +12,6 @@ var firebaseConfig = {
   appId: "1:292208937831:web:34c430c9fcd857dddc3dc2"
 }
 let firebaseApp = firebase.initializeApp(firebaseConfig)
-let firebaseAuth = firebaseApp.auth
+let firebaseAuth = firebaseApp.auth()
 
 export { firebaseAuth }
