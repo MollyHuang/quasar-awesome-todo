@@ -14,6 +14,9 @@ const mutations = {
   },
   setShowTasksInOneList(state, value) {
     state.settings.showTasksInOneList = value
+  },
+  setSettings(state, settings) {
+    Object.assign(state.settings, settings)
   }
 }
 
@@ -30,6 +33,13 @@ const actions = {
   },
   saveSettings({ state }) {
     LocalStorage.set('settings', state.settings)
+  },
+  getSettings({ commit }) {
+    let settings = LocalStorage.getItem('settings')
+    // console.log('getSettings:', settings)
+    if (settings) {
+      commit('setSettings', settings)
+    }
   }
 }
 
