@@ -5,7 +5,7 @@
         <template v-slot:avatar>
           <q-icon name="account_circle" color="primary" />
         </template>
-        Register to access your todo anywhere!
+        {{ tab | titleCase }} to access your Todos anywhere!
       </q-banner>
     </div>
     <div class="row q-mb-md">
@@ -69,6 +69,11 @@ export default {
         }
       }
     },
+  },
+  filters: {
+    titleCase(value) {
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
   }
 }
 </script>
