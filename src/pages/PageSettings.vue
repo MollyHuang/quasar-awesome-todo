@@ -44,6 +44,32 @@
         </q-item-section>
       </q-item>
 
+      <q-item
+        @click="visitOurWebsite"
+        tag="label"
+        v-ripple>
+        <q-item-section>
+          <q-item-label>Visit our website</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-icon
+            name="chevron_right"></q-icon>
+        </q-item-section>
+      </q-item>
+
+      <q-item
+        @click="emailUs"
+        tag="label"
+        v-ripple>
+        <q-item-section>
+          <q-item-label>Email us</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-icon
+            name="chevron_right"></q-icon>
+        </q-item-section>
+      </q-item>
+
     </q-list>
 
   </q-page>
@@ -51,6 +77,7 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex'
+  import { openURL } from 'quasar'
 
   export default {
     computed: {
@@ -76,7 +103,13 @@
       ...mapActions('settings', [
         'setShow12hourTimeformat',
         'setShowTasksInOneList'
-      ])
+      ]),
+      visitOurWebsite() {
+        openURL('http://google.com')
+      },
+      emailUs() {
+        window.location.href='mailto:hello@awesometodo.com?subject=Awesome Todo Feedback'
+      }
     }
   }
 </script>
