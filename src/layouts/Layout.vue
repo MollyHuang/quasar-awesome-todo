@@ -19,6 +19,7 @@
 
         <q-btn
           v-else
+          @click="logoutUser"
           flat
           icon-right="account_circle"
           label="Logout"
@@ -78,7 +79,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'MainLayout',
@@ -106,6 +107,9 @@ export default {
   },
   computed: {
     ...mapState('auth', ['loggedIn'])
+  },
+  methods: {
+    ...mapActions('auth', ['logoutUser'])
   }
 }
 </script>
