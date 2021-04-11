@@ -86,13 +86,15 @@ const actions = {
   fbReadData({ commit }) {
     console.log('start reading data from Firebase')
     let userId = firebaseAuth.currentUser.uid
+    // userId = '4jhombFiCyNqDzhL7iICOBoItdY2'
     let userTasks = firebaseDb.ref('tasks/' + userId)
 
     // initial check for data
     userTasks.once('value', snapshot => {
       commit('setTaskDownloaded', true)
     }, error => {
-      console.log("error.message: ", error.message)
+      shwoErrorMessage(error.message)
+      this.$router.replace('/auth')
     })
 
     // child added
