@@ -52,10 +52,10 @@ const mutations = {
 
 // 可以異步執行
 const actions = {
-  updateTask({ commit }, payload) {
+  updateTask({ dispatch }, payload) {
     // console.log('updateTask action')
     // console.log('payload: ', payload)
-    commit('updateTask', payload)
+    dispatch('fbUpdateTask', payload)
   },
   deleteTask({ commit }, id) {
     commit('deleteTask', id)
@@ -66,7 +66,7 @@ const actions = {
       id: taskId,
       task: task
     }
-    dispatch('fbAddData', payload)
+    dispatch('fbAddTask', payload)
   },
   setSearch({ commit }, value) {
     commit('setSearch', value)
@@ -107,11 +107,17 @@ const actions = {
       commit('deleteTask', snapshot.key)
     })
   },
-  fbAddData({ }, payload) {
-    console.log("fbAddData payload: ", payload)
+  fbAddTask({ }, payload) {
+    console.log("fbAddTask payload: ", payload)
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
     taskRef.set(payload.task)
+  },
+  fbUpdateTask({ }, payload) {
+    console.log("fbUpdateTask payload: ", payload)
+    let userId = firebaseAuth.currentUser.uid
+    let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
+    taskRef.update(payload.updates)
   },
 }
 
