@@ -27,6 +27,7 @@ const state = {
   sort: 'dueDate'
 }
 
+// 同步執行
 const mutations = {
   updateTask(state, payload) {
     // console.log('payload (from mutations): ', payload)
@@ -49,6 +50,7 @@ const mutations = {
   }
 }
 
+// 可以異步執行
 const actions = {
   updateTask({ commit }, payload) {
     // console.log('updateTask action')
@@ -58,13 +60,13 @@ const actions = {
   deleteTask({ commit }, id) {
     commit('deleteTask', id)
   },
-  addTask({ commit }, task) {
+  addTask({ dispatch }, task) {
     let taskId = uid()
     let payload = {
       id: taskId,
       task: task
     }
-    commit('addTask', payload)
+    dispatch('fbAddData', payload)
   },
   setSearch({ commit }, value) {
     commit('setSearch', value)
@@ -104,7 +106,13 @@ const actions = {
     userTasks.on('child_removed', snapshot => {
       commit('deleteTask', snapshot.key)
     })
-  }
+  },
+  fbAddData({ }, payload) {
+    console.log("fbAddData payload: ", payload)
+    let userId = firebaseAuth.currentUser.uid
+    let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
+    taskRef.set(payload.task)
+  },
 }
 
 const getters = {
