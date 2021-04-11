@@ -3,43 +3,53 @@
 
     <div class="q-pa-md absolute full-width full-height column">
 
-      <div class="row q-mb-lg">
-        <search />
-        <sort />
-      </div>
+      <template
+        v-if="taskDownloaded">
 
-      <q-scroll-area class="q-scroll-area-tasks">
+        <div class="row q-mb-lg">
+          <search />
+          <sort />
+        </div>
 
-        <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">
-          No search results.
-        </p>
+        <q-scroll-area class="q-scroll-area-tasks">
 
-        <no-tasks
-          v-if="!Object.keys(tasksTodo).length 
-          && !search
-          && !settings.showTasksInOneList" />
+          <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">
+            No search results.
+          </p>
 
-        <task-todo
-          v-if="Object.keys(tasksTodo).length"
-          :tasksTodo="tasksTodo" />
+          <no-tasks
+            v-if="!Object.keys(tasksTodo).length 
+            && !search
+            && !settings.showTasksInOneList" />
 
-        <task-completed
-          v-if="Object.keys(tasksCompleted).length"
-          :tasksCompleted="tasksCompleted"
-          class="q-mb-xl" />
-      
-      </q-scroll-area>
+          <task-todo
+            v-if="Object.keys(tasksTodo).length"
+            :tasksTodo="tasksTodo" />
 
-      <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
-        <q-btn
-          @click.stop="showAddTask = true"
-          round
-          class="all-pointer-events"
-          icon="add"
-          size="24px"
-          color="primary"
-        />
-      </div>
+          <task-completed
+            v-if="Object.keys(tasksCompleted).length"
+            :tasksCompleted="tasksCompleted"
+            class="q-mb-xl" />
+        
+        </q-scroll-area>
+
+        <div class="absolute-bottom text-center q-mb-lg no-pointer-events">
+          <q-btn
+            @click.stop="showAddTask = true"
+            round
+            class="all-pointer-events"
+            icon="add"
+            size="24px"
+            color="primary"
+          />
+        </div>
+
+      </template>
+
+      <template
+        v-else>
+        Loading...  
+      </template>
     
     </div>
 
@@ -61,7 +71,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("tasks", ["search"]),
+    ...mapState("tasks", ["search", "taskDownloaded"]),
     ...mapGetters("settings", ["settings"]),
     ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
 

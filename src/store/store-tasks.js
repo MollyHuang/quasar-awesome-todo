@@ -24,7 +24,8 @@ const state = {
     // }
   },
   search: '',
-  sort: 'dueDate'
+  sort: 'dueDate',
+  taskDownloaded: false
 }
 
 // 同步執行
@@ -47,7 +48,10 @@ const mutations = {
   },
   setSort(state, value) {
     state.sort = value
-  }
+  },
+  setTaskDownloaded(state, value) {
+    state.taskDownloaded = value
+  },
 }
 
 // 可以異步執行
