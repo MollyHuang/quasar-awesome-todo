@@ -17,7 +17,7 @@ const actions = {
     Loading.show()
     firebaseAuth.createUserWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
-        console.log('response: ', response)
+        console.log('registerUser response: ', response)
       })
       .catch(error => {
         shwoErrorMessage(error.message)
@@ -27,7 +27,7 @@ const actions = {
     Loading.show()
     firebaseAuth.signInWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
-        console.log('response: ', response)
+        console.log('loginUser response: ', response)
       })
       .catch(error => {
         shwoErrorMessage(error.message)
@@ -48,6 +48,7 @@ const actions = {
         dispatch('tasks/fbReadData', null, { root: true })
       }
       else {
+        commit('tasks/clearTasks', null, { root: true })
         commit('tasks/setTaskDownloaded', false, { root: true })
         commit('setLoggedIn', false)
         LocalStorage.set('loggedIn', false)

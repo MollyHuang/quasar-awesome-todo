@@ -30,6 +30,10 @@ const state = {
 
 // 同步執行
 const mutations = {
+  addTask(state, payload) {
+    // console.log('addTask (from mutations): ', payload)
+    Vue.set(state.tasks, payload.id, payload.task)
+  },
   updateTask(state, payload) {
     // console.log('payload (from mutations): ', payload)
     Object.assign(state.tasks[payload.id], payload.updates)
@@ -39,9 +43,8 @@ const mutations = {
     // delete state.tasks[id]
     Vue.delete(state.tasks, id)
   },
-  addTask(state, payload) {
-    // console.log('addTask (from mutations): ', payload)
-    Vue.set(state.tasks, payload.id, payload.task)
+  clearTasks() {
+    state.tasks = {}
   },
   setSearch(state, value) {
     state.search = value
