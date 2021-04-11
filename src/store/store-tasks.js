@@ -84,6 +84,10 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let userTasks = firebaseDb.ref('tasks/' + userId)
 
+    userTasks.once('value', snapshot => {
+      commit('setTaskDownloaded', true)
+    })
+
     // child added
     userTasks.on('child_added', snapshot => {
       // console.log("snapshot: ", snapshot)
