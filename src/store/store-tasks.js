@@ -80,15 +80,24 @@ const actions = {
 
     // child added
     userTasks.on('child_added', snapshot => {
-      console.log("snapshot: ", snapshot)
+      // console.log("snapshot: ", snapshot)
       let task = snapshot.val()
-      console.log("task: ", task)
-
+      // console.log("task: ", task)
       let payload = {
         id: snapshot.key,
         task: task
       }
       commit('addTask', payload)
+    })
+
+    // child changed
+    userTasks.on('child_changed', snapshot => {
+      let task = snapshot.val()
+      let payload = {
+        id: snapshot.key,
+        updates: task
+      }
+      commit('updateTask', payload)
     })
   }
 }
