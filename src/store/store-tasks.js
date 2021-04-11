@@ -57,8 +57,8 @@ const actions = {
     // console.log('payload: ', payload)
     dispatch('fbUpdateTask', payload)
   },
-  deleteTask({ commit }, id) {
-    commit('deleteTask', id)
+  deleteTask({ dispatch }, id) {
+    dispatch('fbDeleteTask', id)
   },
   addTask({ dispatch }, task) {
     let taskId = uid()
@@ -118,6 +118,12 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
     taskRef.update(payload.updates)
+  },
+  fbDeleteTask({ }, taskId) {
+    console.log("fbDeleteTask taskId: ", taskId)
+    let userId = firebaseAuth.currentUser.uid
+    let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
+    taskRef.remove()
   },
 }
 
