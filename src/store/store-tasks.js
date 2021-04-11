@@ -3,96 +3,24 @@ import { uid } from 'quasar'
 
 const state = {
   tasks: {
-    'ID1': {
-      name: "Go to shop",
-      completed: false,
-      dueDate: '2019/05/12',
-      dueTime: '18:30'
-    },
-    'ID2': {
-      name: "Get bananas",
-      completed: false,
-      dueDate: '2019/05/13',
-      dueTime: '14:00'
-    },
-    'ID3': {
-      name: "Get apples",
-      completed: false,
-      dueDate: '2019/05/14',
-      dueTime: '16:00'
-    },
-    // 'ID4': {
+    // 'ID1': {
     //   name: "Go to shop",
     //   completed: false,
     //   dueDate: '2019/05/12',
     //   dueTime: '18:30'
     // },
-    // 'ID5': {
+    // 'ID2': {
     //   name: "Get bananas",
     //   completed: false,
     //   dueDate: '2019/05/13',
     //   dueTime: '14:00'
     // },
-    // 'ID6': {
+    // 'ID3': {
     //   name: "Get apples",
     //   completed: false,
     //   dueDate: '2019/05/14',
     //   dueTime: '16:00'
-    // },
-    // 'ID7': {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: '2019/05/12',
-    //   dueTime: '18:30'
-    // },
-    // 'ID8': {
-    //   name: "Get bananas",
-    //   completed: false,
-    //   dueDate: '2019/05/13',
-    //   dueTime: '14:00'
-    // },
-    // 'ID9': {
-    //   name: "Get apples",
-    //   completed: false,
-    //   dueDate: '2019/05/14',
-    //   dueTime: '16:00'
-    // },
-    // 'ID10': {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: '2019/05/12',
-    //   dueTime: '18:30'
-    // },
-    // 'ID11': {
-    //   name: "Get bananas",
-    //   completed: false,
-    //   dueDate: '2019/05/13',
-    //   dueTime: '14:00'
-    // },
-    // 'ID12': {
-    //   name: "Get apples",
-    //   completed: false,
-    //   dueDate: '2019/05/14',
-    //   dueTime: '16:00'
-    // },
-    // 'ID13': {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: '2019/05/12',
-    //   dueTime: '18:30'
-    // },
-    // 'ID14': {
-    //   name: "Get bananas",
-    //   completed: false,
-    //   dueDate: '2019/05/13',
-    //   dueTime: '14:00'
-    // },
-    // 'ID15': {
-    //   name: "Get apples",
-    //   completed: false,
-    //   dueDate: '2019/05/14',
-    //   dueTime: '16:00'
-    // },
+    // }
   },
   search: '',
   sort: 'dueDate'
@@ -143,6 +71,10 @@ const actions = {
   setSort({ commit }, value) {
     commit('setSort', value)
   },
+
+  fbReadData({ commit }) {
+    console.log('start reading data from Firebase')
+  }
 }
 
 const getters = {
