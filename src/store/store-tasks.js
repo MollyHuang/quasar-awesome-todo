@@ -87,8 +87,11 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let userTasks = firebaseDb.ref('tasks/' + userId)
 
+    // initial check for data
     userTasks.once('value', snapshot => {
       commit('setTaskDownloaded', true)
+    }, error => {
+      console.log("error.message: ", error.message)
     })
 
     // child added
@@ -119,19 +122,19 @@ const actions = {
     })
   },
   fbAddTask({ }, payload) {
-    console.log("fbAddTask payload: ", payload)
+    // console.log("fbAddTask payload: ", payload)
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
     taskRef.set(payload.task)
   },
   fbUpdateTask({ }, payload) {
-    console.log("fbUpdateTask payload: ", payload)
+    // console.log("fbUpdateTask payload: ", payload)
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
     taskRef.update(payload.updates)
   },
   fbDeleteTask({ }, taskId) {
-    console.log("fbDeleteTask taskId: ", taskId)
+    // console.log("fbDeleteTask taskId: ", taskId)
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
     taskRef.remove()
