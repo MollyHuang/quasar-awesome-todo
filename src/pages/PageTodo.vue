@@ -48,7 +48,13 @@
 
       <template
         v-else>
-        Loading...  
+        <div class="absolute-center">
+          <q-spinner-box
+            color="primary"
+            size="3em"
+          />
+          <q-tooltip :offset="[0, 8]">QSpinnerBox</q-tooltip>
+        </div>
       </template>
     
     </div>
