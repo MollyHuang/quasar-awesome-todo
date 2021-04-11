@@ -99,6 +99,11 @@ const actions = {
       }
       commit('updateTask', payload)
     })
+
+    // child removed
+    userTasks.on('child_removed', snapshot => {
+      commit('deleteTask', snapshot.key)
+    })
   }
 }
 
