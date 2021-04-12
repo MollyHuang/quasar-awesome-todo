@@ -1,0 +1,27 @@
+Firebase Realtime Database > Rules
+
+{
+  "rules": {
+    ".read": "now < 1620576000000",  // 2021-5-10
+    ".write": "now < 1620576000000",  // 2021-5-10
+  }
+}
+
+
+{
+  "rules": {
+    ".read": "auth != null",  // auth user
+    ".write": "auth != null",  // auth user
+  }
+}
+
+{
+  "rules": {
+  	"tasks" : {
+  	  "$uid": {
+	    ".read": "auth.uid == $uid",
+	    ".write": "auth.uid == $uid",
+  	  }
+  	}
+  }
+}
