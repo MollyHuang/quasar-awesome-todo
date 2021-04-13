@@ -28,6 +28,8 @@ app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    minWidth: 500,
+    minHeight: 500,
     useContentSize: true,
     webPreferences: {
       // Change from /quasar.conf.js > electron > nodeIntegration;
