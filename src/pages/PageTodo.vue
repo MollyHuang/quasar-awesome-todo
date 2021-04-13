@@ -101,10 +101,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
   /* full available height */
   .q-scroll-area-tasks {
     display: flex;
     flex-grow: 1;
+  }
+  .q-scroll-area-tasks{
+    display: flex;
+    flex-grow: 1;
+    .scroll {
+      height: auto !important;
+    }
   }
 </style>
