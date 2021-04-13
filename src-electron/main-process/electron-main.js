@@ -14,12 +14,17 @@ if (process.env.PROD) {
   global.__statics = __dirname
 }
 
+/**
+ * variables & constants
+ */
+
 let mainWindow
 
-function createWindow () {
-  /**
-   * Initial window options
-   */
+/**
+ * app ready
+ */
+
+app.on('ready', () => {
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
@@ -40,18 +45,12 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-}
-
-app.on('ready', createWindow)
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
 })
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+/**
+ * app events
+ */
+
+app.on('window-all-closed', () => {
+  app.quit()
 })
