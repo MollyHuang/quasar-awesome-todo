@@ -11,6 +11,7 @@ export const menuTemplate = [
       { role: 'about' },
       {
         label: 'Settings',
+        accelerator: process.platform === 'darwin' ? 'Cmd+,' : 'Shift+,',
         click() {
           mainWindow.webContents.send('show-settings')
         }
