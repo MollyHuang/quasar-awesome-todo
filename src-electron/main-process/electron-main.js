@@ -29,7 +29,7 @@ const menu = Menu.buildFromTemplate(menuTemplate)
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    width: 500,
+    width: 800,
     height: 500,
     minWidth: 500,
     minHeight: 500,
