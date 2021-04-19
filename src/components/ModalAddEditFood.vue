@@ -38,17 +38,11 @@
           filled
           v-model="foodToSubmit.imageUrl"
           label="Image URL"
-          class="col"
-        />
+          class="col" />
         <q-img
-          :src="
-            foodToSubmit.imageUrl
-              ? foodToSubmit.imageUrl
-              : 'statics/image-placeholder.png'
-          "
+          :src="foodToSubmit.imageUrl? foodToSubmit.imageUrl : 'image-placeholder.png'"
           class="q-ml-sm"
-          contain
-        />
+          contain />
       </div>
 
       <div class="q-mb-md">
@@ -72,7 +66,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  props: ["type", "food"],
+  props: ["type", "food", "id"],
   data() {
     return {
       foodToSubmit: {
@@ -96,17 +90,21 @@ export default {
       }
     },
     submitFood() {
-      console.log("[ModalAddEditFood.vue] submitFood type", this.type);
+      console.log("[ModalAddEditFood.vue] submitFood type", this.type)
       if (this.type == "add") {
-        this.addFood(this.foodToSubmit);
+        this.addFood(this.foodToSubmit)
       } else {
-        this.updateFood(this.foodToSubmit);
+        this.updateFood({
+          id: this.id, 
+          updates: this.foodToSubmit
+        })
+        // this.updateFood(this.foodToSubmit);
       }
     }
   },
   mounted() {
     if (this.type == "edit") {
-      this.foodToSubmit = Object.assign({}, this.food);
+      this.foodToSubmit = Object.assign({}, this.food)
     }
   }
 };

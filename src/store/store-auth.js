@@ -3,12 +3,16 @@ import { firebaseAuth } from 'boot/firebase.js'
 import { shwoErrorMessage } from 'src/functions/functions-show-error-message'
 
 const state = {
-  loggedIn: false
+  loggedIn: false,
+  loggedInEmail: ''
 }
 
 const mutations = {
   setLoggedIn(state, value) {
     state.loggedIn = value
+  },
+  setLoggedInEmail(state, value) {
+    state.loggedInEmail = value
   }
 }
 
@@ -43,17 +47,21 @@ const actions = {
         // User is signed in.
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
-        this.$router.push('/')
-          .catch(err => { })
+        commit('setLoggedInEmail', user.email)
+        LocalStorage.set('loggedInEmail', user.email)
+        this.$router.push('/').catch(err => { })
         dispatch('tasks/fbReadData', null, { root: true })
+        dispatch('foods/fbReadData', null, { root: true })
       }
       else {
         commit('tasks/clearTasks', null, { root: true })
         commit('tasks/setTaskDownloaded', false, { root: true })
+        commit('foods/clearFoods', null, { root: true })
         commit('setLoggedIn', false)
         LocalStorage.set('loggedIn', false)
-        this.$router.replace('/auth')
-          .catch(err => { })
+        commit('setLoggedInEmail', '')
+        LocalStorage.set('loggedInEmail', '')
+        this.$router.replace('/auth').catch(err => { })
       }
     })
   },

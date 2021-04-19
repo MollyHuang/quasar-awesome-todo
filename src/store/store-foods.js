@@ -1,7 +1,11 @@
 import Vue from 'vue'
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
+import { firebaseAuth, firebaseDb } from 'boot/firebase'
+import { shwoErrorMessage } from 'src/functions/functions-show-error-message'
 
 const state = {
+  foods: {}
+  /*
   foods: [
     {
       id: 1,
@@ -25,38 +29,133 @@ const state = {
       rating: 1
     }
   ]
+  */
 }
 
 const mutations = {
+  updateFood(state, payload) {
+    console.log('updateFood (from mutations): ', payload)
+    Object.assign(state.foods[payload.id], payload.updates)
+    // let index = state.foods.findIndex(stateFood => stateFood.id == food.id);
+    // Vue.set(state.foods, index, food)
+  },
   deleteFood(state, id) {
     console.log('deleteFood id (from mutations): ', id)
-    let index = state.foods.findIndex(food => food.id == id);
-    console.log('deleteFood index (from mutations): ', index)
-    Vue.delete(state.foods, index)
+    Vue.delete(state.foods, id)
+    // let index = state.foods.findIndex(food => food.id == id);
+    // console.log('deleteFood index (from mutations): ', index)
+    // Vue.delete(state.foods, index)
   },
-  addFood(state, food) {
-    console.log('addFood (from mutations): ', food)
-    state.foods.push(food)
+  addFood(state, payload) {
+    // console.log('addFood (from mutations): ', payload)
+    Vue.set(state.foods, payload.id, payload.food)
+    // state.foods.push(food)
   },
-  updateFood(state, food) {
-    console.log('updateFood (from mutations): ', food)
-    let index = state.foods.findIndex(stateFood => stateFood.id == food.id);
-    Vue.set(state.foods, index, food)
-  }
+  clearFoods() {
+    state.foods = {}
+  },
 }
 
 const actions = {
-  deleteFood({ commit }, id) {
-    commit('deleteFood', id)
+  updateFood({ dispatch }, payload) {
+    dispatch('fbUpdateFood', payload)
+    // commit('updateFood', food)
   },
-  addFood({ commit }, food) {
+  deleteFood({ dispatch }, id) {
+    dispatch('fbDeleteFood', id)
+    // commit('deleteFood', id)
+  },
+  addFood({ dispatch }, food) {
     let newId = uid()
-    food.id = newId
-    commit('addFood', food)
+    let payload = {
+      id: newId,
+      food: food
+    }
+    dispatch('fbAddFood', payload)
+    // food.id = newId
+    // commit('addFood', food)
   },
-  updateFood({ commit }, food) {
-    commit('updateFood', food)
-  }
+
+  fbReadData({ commit }) {
+    console.log('start reading foods from Firebase')
+    let userId = firebaseAuth.currentUser.uid
+    // userId = '4jhombFiCyNqDzhL7iICOBoItdY2'
+    let userFoods = firebaseDb.ref('foods/' + userId)
+
+    // initial check for foods
+    userFoods.once('value', snapshot => {
+      // commit('setFoodDownloaded', true)
+    }, error => {
+      shwoErrorMessage(error.message)
+      this.$router.replace('/auth')
+    })
+
+    // child added
+    userFoods.on('child_added', snapshot => {
+      // console.log("snapshot: ", snapshot)
+      let food = snapshot.val()
+      // console.log("food: ", food)
+      let payload = {
+        id: snapshot.key,
+        food: food
+      }
+      commit('addFood', payload)
+    })
+
+    // child changed
+    userFoods.on('child_changed', snapshot => {
+      let food = snapshot.val()
+      let payload = {
+        id: snapshot.key,
+        updates: food
+      }
+      commit('updateFood', payload)
+    })
+
+    // child removed
+    userFoods.on('child_removed', snapshot => {
+      commit('deleteFood', snapshot.key)
+    })
+  },
+  fbAddFood({ }, payload) {
+    console.log("fbAddFood payload: ", payload)
+    let userId = firebaseAuth.currentUser.uid
+    let foodRef = firebaseDb.ref('foods/' + userId + '/' + payload.id)
+    foodRef.set(payload.food, error => {
+      if (error) {
+        shwoErrorMessage(error.message)
+      }
+      else {
+        Notify.create('Food added!')
+      }
+    })
+  },
+  fbUpdateFood({ }, payload) {
+    console.log("fbUpdateFood payload: ", payload)
+    let userId = firebaseAuth.currentUser.uid
+    let foodRef = firebaseDb.ref('foods/' + userId + '/' + payload.id)
+    foodRef.update(payload.updates, error => {
+      if (error) {
+        shwoErrorMessage(error.message)
+      }
+      else {
+        Notify.create('Food updated!')
+      }
+    })
+  },
+  fbDeleteFood({ }, foodId) {
+    console.log("fbDeleteFood foodId: ", foodId)
+    let userId = firebaseAuth.currentUser.uid
+    let foodRef = firebaseDb.ref('foods/' + userId + '/' + foodId)
+    foodRef.remove(error => {
+      if (error) {
+        shwoErrorMessage(error.message)
+      }
+      else {
+        Notify.create('Food deleted!')
+      }
+    })
+  },
 }
 
 const getters = {

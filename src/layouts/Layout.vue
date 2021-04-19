@@ -22,7 +22,7 @@
           @click="logoutUser"
           flat
           icon-right="account_circle"
-          label="Logout"
+          :label="'Logout ' + loggedInEmail"
           class="absolute-right" />
 
       </q-toolbar>
@@ -120,7 +120,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['loggedIn'])
+    ...mapState('auth', ['loggedIn', 'loggedInEmail'])
   },
   methods: {
     ...mapActions('auth', ['logoutUser']),

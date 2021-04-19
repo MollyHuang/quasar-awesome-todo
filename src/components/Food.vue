@@ -1,10 +1,9 @@
 <template>
   <q-card class="card">
     <q-img
-      :src="food.imageUrl ? food.imageUrl : '/image-placeholder.png'"
+      :src="food.imageUrl ? food.imageUrl : 'image-placeholder.png'"
       basic
-      contain
-    >
+      contain>
       <div class="absolute-bottom text-h6">
         {{ food.name }}
       </div>
@@ -38,6 +37,7 @@
       <modal-add-edit-food
         type="edit"
         :food="food"
+        :id="id"
         @close="showEditFoodModal = false"
       />
     </q-dialog>
@@ -45,14 +45,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from "vuex"
 
 export default {
-  props: ["food"],
+  props: ["food", "id"],
   data() {
     return {
       showEditFoodModal: false
-    };
+    }
   },
   methods: {
     ...mapActions("foods", ["deleteFood"]),
@@ -71,15 +71,15 @@ export default {
           }
         })
         .onOk(() => {
-          console.log("[Food.vue] delete food.id=", this.food.id);
-          this.deleteFood(this.food.id);
+          console.log("[Food.vue] delete food.id=", this.id)
+          this.deleteFood(this.id)
         });
     }
   },
   components: {
     "modal-add-edit-food": require("components/ModalAddEditFood.vue").default
   }
-};
+}
 </script>
 
 <style>
