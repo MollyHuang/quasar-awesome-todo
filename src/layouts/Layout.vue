@@ -19,11 +19,12 @@
 
         <q-btn
           v-else
-          @click="logoutUser"
-          flat
-          icon-right="account_circle"
           :label="'Logout ' + loggedInEmail"
-          class="absolute-right" />
+          @click="logoutUser"
+          class="absolute-right"
+          icon-right="account_circle"
+          flat
+        />
 
       </q-toolbar>
 
